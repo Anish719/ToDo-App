@@ -1,0 +1,40 @@
+.container {
+    margin-top: 50px;
+    margin-left: 320px;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    border-spacing: 5px;
+    width: 700px;
+    /* background-image: url(https://ph-files.imgix.net/84333013-d91a-4d84-9801-3dcd99f62b42?auto=format&auto=compress&codec=mozjpeg&cs=strip); */
+  }
+  
+  .account {
+    color: #202124;
+    padding-bottom: 0;
+    padding-top: 16px;
+    font-family: 'Google Sans','Noto Sans Myanmar UI',arial,sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.3333;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  button {
+    background-color: #04aa6d;
+    font-family: Source Sans Pro,sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: center;
+    white-space: nowrap;
+    color: #fff;
+    width: 80%;
+    cursor: pointer;
+    height: 50px;
+    padding: 16px 40px 14px;
+    border-radius: 25px;
+    border: 0;
+  }

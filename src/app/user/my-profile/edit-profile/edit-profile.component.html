@@ -1,0 +1,29 @@
+<app-header></app-header>
+<div class='bold-line'></div>
+<div class='container'>
+    <div class='window'>
+        <div class='overlay'></div>
+        <div class='content'>
+            <div class='welcome'>Edit Profile!</div>
+            <div class='input-fields'>
+                <input type='text' [(ngModel)]="firstName" placeholder='First Name' class='input-line full-width' value="{{ firstName }}">
+                <input type='text' [(ngModel)]="lastName" placeholder='Last Name' class='input-line full-width' value="{{ lastName }}">
+                <input type='password' [(ngModel)]="password" placeholder='Password' class='input-line full-width' value="{{ password }}">
+                <input type='text' [(ngModel)]="address" placeholder='Address' class='input-line full-width' value="{{ address }}">
+                
+                <div class="form-group">
+                    <select id="company" [(ngModel)]="gender" class="form-control" style="width:300px; margin-top: 7px;" pl required>
+                      <option value="Male" selected="{{ gender }} === 'Male'">Male</option>
+                      <option value="Female" selected="{{ gender }} === 'Female'">Female</option>
+                      <option value="Other" selected="{{ gender }} === 'Other'">Other</option>
+                    </select>
+                </div>
+                
+                <input type="file" multiple class="input-line full-width" id="profileImage" placeholder="Profile Image"
+                    accept="image/*" (change)="onUploadImage($event)"/>
+                <img id="previewProfileImage" class="avatar border" style="display: none;" />
+            </div>
+            <div><button class='ghost-round full-width' (click)="onSubmit()">Edit Profile</button></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="task">
+            <div class="form-group row">
+
+                <label for="taskName" class="col-sm-3 col-form-label">Name</label>
+                <input [(ngModel)]="newTask" id="taskName" type="text" value="" class="form-control"
+                    style="width:170px; margin-bottom: 15px;" placeholder="Task Name">
+
+                <label for="cat" class="col-sm-3 col-form-label">Category</label>
+                <input type="text" id="cat" [(ngModel)]="category" class="form-control"
+                    style="width:170px; margin-bottom: 15px;" placeholder="Category">
+
+                <div class="form-group row" style="margin-bottom: 15px;">
+                    <label for="public" class="col-sm-3 col-form-label">Is Public</label>
+                    <div class="form-check">
+                        <div class="col-sm-1"><input checked class="form-check-input" [(ngModel)]="isPublic"
+                                type="radio" name="public" id="Yes" value="Yes">
+                            <label class="form-check-label" style="margin-left: 5px;" for="yesPublic">
+                                Yes
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="form-check">
+                        <input checked class="form-check-input" [(ngModel)]="isPublic" type="radio" name="public"
+                            id="noPublic" value="No">
+                        <label class="form-check-label" style="margin-left: 5px;" for="noPublic">
+                            No
+                        </label>
+                    </div>
+                </div>
+
+                <label for="compDate" class="col-sm-3 col-form-label">Completion Date</label>
+                <input type="date" id="compDate" [(ngModel)]="date" class="form-control"
+                    style="width:170px; margin-bottom: 15px;" placeholder="Completion Date">
+
+            </div>
+            <button (click)="addToList()" class="btn btn-primary" style="margin-top: 15px; width: 25%;"
+                [disabled]="!addTaskButtonStatus()">
+                ADD TASK
+            </button>
+            <div class="form-inline" *ngIf="items.length > 0">
+                <input type="text" [(ngModel)]="taskSerach" class="form-control" style="margin-top: 10px;"
+                    placeholder="Task Search">
+
+                <input type="text" [(ngModel)]="categorySerach" class="form-control"
+                    style="margin-top: 12px; margin-left: 10px;" placeholder="Category Search">
+
+                <input type="date" [(ngModel)]="dateSearch" class="form-control"
+                    style="margin-top: 12px; margin-left: 10px;">
+
+                <button *ngIf="taskSerach || categorySerach || dateSearch" class="btn btn-primary form-control"
+                    style="margin-left: 12px; height: 25px; width: 100px;" (click)="clearFilter()">X Clear
+                    Filter</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="items.length === 0"
+        style="width: 300px; margin-top: 10px; margin-left: 263px;">
+        <h3 style="text-align: center;">No Tasks available</h3>
+    </div>
+
+    <table class="table table-bordered table-hover table-dark" style="margin-top: 25px; margin-left: 263px;"
+        *ngIf="items.length > 0">
+        <thead>
+            <tr class="warning">
+                <th js-sort-asc>Task Name</th>
+                <th>Category</th>
+                <th>Public</th>
+                <th>Date</th>
+                <th>Edit/Update</th>
+                <th>Delete Item</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let item of items | filter:'task':taskSerach | filter:'category':categorySerach | filter:'date':dateSearch; let index = index">
+                <td *ngIf="!item.editFlag">{{ item.task }}</td>
+                <td *ngIf=" item.editFlag ">
+                    <input type="text" [(ngModel)]="updateTaskValue" class="form-control" style="width: 150px;"
+                        placeholder="Edit Task">
+                </td>
+
+                <td *ngIf="!item.editFlag">{{ item.category }}</td>
+                <td *ngIf="item.editFlag">
+                    <input type="text" [(ngModel)]="updateCategoryValue" class="form-control" style="width: 150px;"
+                        placeholder="Edit Category">
+                </td>
+
+                <td *ngIf="!item.editFlag">{{ item.isPublic }}</td>
+                <td *ngIf="item.editFlag">
+                    <input class="form-check-input" [(ngModel)]="updatePublicValue" type="radio" name="editpublic" id="Yes"
+                        value="Yes">
+                    <label class="form-check-label" style="margin-left: 2px;" for="editpublicYesPublic">
+                        Yes
+                    </label>
+                    <input checked class="form-check-input" [(ngModel)]="updatePublicValue" type="radio" name="editpublic"
+                        id="editNoPublic" value="No">
+                    <label class="form-check-label" style="margin-left: 2px;" for="editNoPublic">
+                        No
+                    </label>
+                </td>
+
+                <td *ngIf="!item.editFlag">{{ item.date | date: medium}}</td>
+                <td *ngIf="item.editFlag ">
+                    <input type="date" [(ngModel)]="updateDateValue" class="form-control" style="width: 180px;"
+                        placeholder="Edit Date">
+                </td>
+
+                <td *ngIf="!item.editFlag" (click)="editTask(index)"><button class="btn btn-primary"
+                        style="width: 70px;">Edit</button></td>
+                <td *ngIf="item.editFlag" (click)="updateTask(index)"><button class="btn btn-success"
+                        style="width: 70px;">Update</button>
+                </td>
+
+                <td (click)="deleteTask(index)"><button class="btn btn-danger" style="width: 70px;">Delete</button></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
